@@ -7,7 +7,7 @@ export const FETCH_USERS_FAILURE = "FETCH_USERS_FAILURE"
 export const getUsers = () => dispatch => {
   dispatch({ type: FETCH_USERS_START });
   axios
-    .get("http://localhost:5001/api/users")
+    .get("http://localhost:8000/api/users")
     // .then(function (response) {
     //   // handle success
     //   console.log(response);

@@ -14,11 +14,6 @@ const LoginContainer = styled.div`
   align-items: center
 `
 
-const Logo = styled.img`
-  height: 350px;
-  width: auto;
-  margin: 24px auto;
-`
 
 const StyledForm = styled.form`
   margin: 48px auto 0;
@@ -79,21 +74,22 @@ class Login extends React.Component {
   handleSubmit = event => {
 
     event.preventDefault();
-    const endpoint = 'http://localhost:5001/api/register'; 
+    const endpoint = 'http://localhost:8000/api/login'; 
 
     axios
       .post(endpoint, this.state)
       .then(res => {
-        localStorage.setItem('jwt', res.data.token);
-        localStorage.setItem('userId', res.data.user.id);
-        localStorage.setItem('userType', res.data.user.role)
-
-       
-        this.props.getUsers();
+        
         this.props.history.push('/home');
+        this.props.getUsers();
       })
       .catch(err => console.log(err));     
   };
+
+  signUp = event => {
+    event.preventDefault();
+    this.props.history.push('/signup');
+  }
 
   render() {
     return (
@@ -108,10 +104,10 @@ class Login extends React.Component {
             <div>
 
               <LoginButtons onClick={this.handleSubmit}>Log In</LoginButtons>
+              <LoginButtons onClick={this.signUp}>Sign Up</LoginButtons>
 
             </div>
             
-            <LoginButtons onClick={this.handleRegister}>Register</LoginButtons>
           </ButtonContainer>
 
         </StyledForm>

@@ -3,6 +3,7 @@ import './App.css';
 import HomeView from "./views/HomeView"
 import { Route } from "react-router-dom"
 import Login from "./Components/Login/Login"
+import Signup from "./Components/Signup/Signup"
 
 
 class App extends Component {
@@ -14,6 +15,11 @@ class App extends Component {
 
         <Route path="/home" render={props => (
           <HomeView />
+        )}
+        />
+
+        <Route path="/signup" render={props => (
+          <Signup />
         )}
         />
       
