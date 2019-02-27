@@ -9,7 +9,7 @@ function Userlist(props) {
   return (
     <div>
       {props.users.map(user => (
-        <p key={user.username}>{user.username}</p>
+        <p key={user.username}>{user.username}, department: {user.department}</p>
       ))}
     </div>
   )
