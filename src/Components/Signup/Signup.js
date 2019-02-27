@@ -61,6 +61,7 @@ class RegisterForm extends React.Component {
     username: "",
     password: "",
     department: "",
+    errorMsg: ""
   }
 
   handleChanges = e => {
@@ -70,14 +71,14 @@ class RegisterForm extends React.Component {
   handleSignup = event => {
   event.preventDefault();
   axios
-    .post('https://locahlhost:8000/api/register', {
+    .post('http://localhost:8000/api/register', {
       username: this.state.username,
       password: this.state.password,
       department: this.state.department,
     })
     .then(res => {
-      localStorage.setItem('jwt', res.data.token);
-      console.log("it worked!!", res.data)
+      // localStorage.setItem('jwt', res.data.token);
+      // console.log("it worked!!", res.data)
 
       this.props.history.push("/home");
     })
@@ -99,7 +100,7 @@ class RegisterForm extends React.Component {
           <UserInfo type="text" autocomplete="off" name="password" onChange={this.handleChanges} placeholder="Password" />
           <UserInfo type="text" autoComplete="off" name="department" onChange={this.handleChanges} placeholder="Department" />
       
-          <FormButton onClick={this.handleSignup}>Register User</FormButton>
+          <FormButton onClick={this.handleSignup}>Sign Up</FormButton>
   
         </StyledForm>
   
