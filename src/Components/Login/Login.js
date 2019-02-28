@@ -1,8 +1,7 @@
 import React from "react";
-import { withRouter } from "react-router"
+// import { withRouter } from "react-router"
 import axios from 'axios';
-import { getUsers } from "../../store/actions/"
-import { connect } from "react-redux";
+
 
 import styled from "styled-components";
 
@@ -74,14 +73,14 @@ class Login extends React.Component {
   handleSubmit = event => {
 
     event.preventDefault();
-    const endpoint = 'http://localhost:8000/api/login'; 
+    const endpoint = 'http://localhost:8000/api/auth/login'; 
 
     axios
       .post(endpoint, this.state)
       .then(res => {
+        localStorage.setItem('jwt', res.data.token)
         
-        this.props.history.push('/home');
-        this.props.getUsers();
+        this.props.history.push('/users');
       })
       .catch(err => console.log(err));     
   };
@@ -118,11 +117,7 @@ class Login extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({
-})
 
-export default withRouter(connect(
-  mapStateToProps,
-  { getUsers }
-)(Login))
+
+export default Login;
 
