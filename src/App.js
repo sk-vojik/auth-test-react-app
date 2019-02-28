@@ -1,19 +1,40 @@
 import React, { Component } from 'react';
 import './App.css';
 import HomeView from "./views/HomeView"
-import { Route } from "react-router-dom"
 import Login from "./Components/Login/Login"
 import Signup from "./Components/Signup/Signup"
+import { Route, NavLink, withRouter } from 'react-router-dom';
+
 
 
 class App extends Component {
+
+  logout = () => {
+    localStorage.removeItem('jwt');
+
+    this.props.history.push('/login');
+  }
+
   render() {
     return (
       <div className="App">
 
-        <Route exact path="/" component={Login} />
+        <header>
+         <nav>
+          <NavLink to="/login">Login</NavLink>
+          &nbsp; | &nbsp;
+          <NavLink to="/users">Users</NavLink>
+          &nbsp; | &nbsp;
+          <NavLink to="/signup">Users</NavLink>
+          &nbsp; | &nbsp;
+          <button onClick={this.logout}>Logout</button>
 
-        <Route path="/home" render={props => (
+         </nav>
+       </header>
+
+        <Route exact path="/login" component={Login} />
+
+        <Route path="/users" render={props => (
           <HomeView />
         )}
         />
@@ -28,4 +49,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);
